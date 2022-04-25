@@ -4,7 +4,10 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-    res.write('Hello world')
+    console.log('Request')
+    return res.json({
+        hello:'world'
+    })
 })
 
 const PORT = process.env.PORT || 3000
