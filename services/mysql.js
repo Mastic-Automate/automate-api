@@ -1,13 +1,20 @@
 import {createConnection} from 'mysql'
 
 const connection = createConnection({
-    // port: process.env.DB_PORT,
+    port: process.env.DB_PORT,
     host: process.env.BD_HOST,
     database: process.env.BD_NAME,
     password: process.env.BD_USER_PASSWORD,
-    user: process.env.BD_USER
+    user: process.env.BD_USER_NAME
 })
 
-connection.connect((err) => console.log(err))
+connection.connect((err) => {
+    console.log(err)
+    console.log(process.env.BD_USER_NAME)
+    console.log(process.env.BD_USER_PASSWORD)
+    console.log(process.env.BD_HOST)
+    console.log(process.env.BD_PORT)
+    console.log(process.env.BD_NAME)
+})
 
 export {connection}
