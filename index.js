@@ -1,27 +1,11 @@
 import express from 'express'
 
-import {createUser, signIn} from './src/services/mysql.js'
+import {authRoutes} from './src/routes/authRoutes.js'
 
 const app = express()
 app.use(express.json())
 
-app.post('/', (req, res) => {
-    return res.json({yes:'no'})
-})
-
-app.post('/signup', (req, res) => {
-    const {userName, userEmail, userPassword} = req.body
-    createUser(userName, userEmail, userPassword)
-    return res.json({
-        insert:'sucess'
-    })
-})
-app.post('/signin', (req, res) =>{
-    const {userEmail, userPassword} = req.body
-    signIn(userEmail, userPassword, (result) =>{
-        return res.json(result)
-    })
-})
+app.use(authRoutes)
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, ()=> {
