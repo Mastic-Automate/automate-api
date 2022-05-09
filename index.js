@@ -1,9 +1,6 @@
-import {config} from 'dotenv'
 import express from 'express'
 
-import {connection} from './services/mysql.js'
-
-config()
+import {connection} from './src/database/mysql.js'
 
 const app = express()
 
@@ -14,12 +11,14 @@ app.get('/', (req, res) => {
     })
 })
 
-app.get('/signin', (req, res) => {
-    connection.query(`INSERT INTO tbUser( userName, userEmail, userPassword) VALUES( ?, ?, ?)`, [ 'Gabriel', 'Gabriel@gmail.com', 'senha123'])
+app.post('/signin', (req, res) => {
+    connection.query('INSERT INTO tbUser( userName, userEmail, userPassword) VALUES( ?, ?, ?)', [ 'Gabriel', 'Gabriel@gmail.com', 'senha123'])
+    return res.json({
+        insert:'sucess'
+    })
 })
 
 const PORT = process.env.PORT || 3000
 app.listen(PORT, ()=> {
     console.log(`App running on localhost:${PORT}`)
-    console.log(process.env.BD_USER_PASSWORD)
 })
