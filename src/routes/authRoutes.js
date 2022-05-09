@@ -6,9 +6,10 @@ import {signIn, createUser} from '../services/mysql.js'
 
 authRoutes.post('/signup', (req, res) => {
     const {userName, userEmail, userPassword} = req.body
-    createUser(userName, userEmail, userPassword)
-    return res.json({
-        insert:'sucess'
+    createUser(userName, userEmail, userPassword).then((sucess) =>{
+        return res.json({
+            sucess:sucess,
+        })
     })
 })
 authRoutes.post('/signin', (req, res) =>{

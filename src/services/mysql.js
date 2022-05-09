@@ -11,12 +11,14 @@ async function checkIfUserAlreadyExists(userEmail){
     })
 }
 
-function createUser(userName, userEmail, userPassword){
-    checkIfUserAlreadyExists(userEmail).then(res => {
-        if(!res){
-            connection.query('INSERT INTO tbUser(userName, userEmail, userPassword) VALUES(?, ?, ?)', [userName, userEmail, userPassword])
-        }
-    })
+async function createUser(userName, userEmail, userPassword){
+    const userAlreadyExists = await checkIfUserAlreadyExists(userEmail)
+    if(!userAlreadyExists){
+        connection.query('INSERT INTO tbUser(userName, userEmail, userPassword) VALUES(?, ?, ?)', [userName, userEmail, userPassword])
+        return true
+    }
+    return false
+    
 }
 function signIn(userEmail, userPassword, callBack){
     const result = {
