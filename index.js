@@ -1,20 +1,25 @@
 import express from 'express'
 
-import {connection} from './src/database/mysql.js'
+import {createUser, signIn} from './src/services/mysql.js'
 
 const app = express()
+app.use(express.json())
 
-app.get('/', (req, res) => {
-    console.log('Request')
-    return res.json({
-        hello:'world'
-    })
+app.post('/', (req, res) => {
+    return res.json({yes:'no'})
 })
 
-app.post('/signin', (req, res) => {
-    connection.query('INSERT INTO tbUser( userName, userEmail, userPassword) VALUES( ?, ?, ?)', [ 'Gabriel', 'Gabriel@gmail.com', 'senha123'])
+app.post('/signup', (req, res) => {
+    const {userName, userEmail, userPassword} = req.body
+    createUser(userName, userEmail, userPassword)
     return res.json({
         insert:'sucess'
+    })
+})
+app.post('/signin', (req, res) =>{
+    const {userEmail, userPassword} = req.body
+    signIn(userEmail, userPassword, (result) =>{
+        return res.json(result)
     })
 })
 

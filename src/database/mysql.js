@@ -13,7 +13,9 @@ const dbConfig = {
 const connection = createConnection(dbConfig)
 
 connection.connect((err) => {
-    console.log(err)
+    if(err){
+        console.log(err)
+    }
 })
 
 export {connection}
