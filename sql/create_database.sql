@@ -7,13 +7,13 @@ CREATE TABLE `tbAutomate` (
   PRIMARY KEY (`idAutomate`)
 );
 
-CREATE TABLE `tbAutomateUser` (
-  `idAutomateUser` integer NOT NULL AUTO_INCREMENT,
-  `idUser` int,
-  `idAutomate` int DEFAULT NULL,
-  PRIMARY KEY `idAutomateUser`,
-  FOREIGN KEY (`idUser`) REFERENCES tbUser(idUser),
-  FOREIGN KEY (`idAutomate`) REFERENCES tbAutomate(idAutomate)
+CREATE TABLE tbAutomateUser (
+  idAutomateUser integer NOT NULL AUTO_INCREMENT,
+  idUser int,
+  idAutomate int DEFAULT NULL,
+  PRIMARY KEY (idAutomateUser),
+  FOREIGN KEY (idUser) REFERENCES tbUser(idUser),
+  FOREIGN KEY (idAutomate) REFERENCES tbAutomate(idAutomate)
 );
 
 
