@@ -6,7 +6,10 @@ async function checkIfUserAlreadyExists(userEmail){
             if(err){
                 return reject(err)
             }
-            return resolve(result.length>0)
+            return resolve({
+                exists:result.length>0,
+                user: result[0]
+            })
         })
     })
 }
@@ -17,7 +20,7 @@ async function createUser(userName, userEmail, userPassword){
         msg:'Impossível criar usuário'
     }
     const userAlreadyExists = await checkIfUserAlreadyExists(userEmail)
-    if(!userAlreadyExists){
+    if(!userAlreadyExists.exists){
         connection.query('INSERT INTO tbUser(userName, userEmail, userPassword) VALUES(?, ?, ?)', [userName, userEmail, userPassword])
         result.sucess = true
         result.msg = 'Usuário criado com sucesso!'
@@ -28,25 +31,25 @@ async function createUser(userName, userEmail, userPassword){
     
 }
 async function signIn(userEmail, userPassword){
+    const result = {
+        sucess:false,
+        user:null,
+        msg:'Impossível efetuar operação'
+    }
+    const userExists = await checkIfUserAlreadyExists(userEmail)
+    if(!userExists.exists){
+        result.msg = 'Usuário não existe'
+        return result
+    }
     return new Promise((resolve, reject) => {
-        const result = {
-            sucess:false,
-            user:null,
-            msg:'Impossível efetuar operação'
+        if(userPassword === userExists.user.userPassword) {
+            result.sucess = true
+            result.user = userExists.user
+            result.msg = 'Signin efetuado com sucesso!'
+        } else {
+            result.msg = 'Senha incorreta'
         }
-        connection.query('SELECT userName, userEmail, userPassword FROM tbUser WHERE userEmail= ? AND userPassword = ?', [userEmail, userPassword], (err, results) => {
-            if(err) {
-                return reject(err)
-            }
-            if(results[0]){
-                result.sucess = true
-                result.user = results[0]
-                result.msg = 'Signin efetuado com sucesso!'
-                return resolve(result)
-            }
-            result.msg = 'Usuário não existe'
-            return resolve(result)
-        })
+        return resolve(result)
     })
     
 
