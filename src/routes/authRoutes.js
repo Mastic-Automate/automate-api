@@ -10,9 +10,10 @@ function handleSignUpRoute(req, res){
     const errors = validationResult(req)
     const {userName, userEmail, userPassword} = req.body
     if(errors.isEmpty()){
-        createUser(userName, userEmail, userPassword).then((sucess) =>{
+        createUser(userName, userEmail, userPassword).then((result) =>{
             return res.status(200).json({
-                sucess:sucess,
+                sucess:result.sucess,
+                msg:result.msg,
                 user: {
                     userName, userEmail, userPassword
                 }
