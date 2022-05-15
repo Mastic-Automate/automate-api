@@ -7,16 +7,6 @@ CREATE TABLE `tbAutomate` (
   PRIMARY KEY (`idAutomate`)
 );
 
-CREATE TABLE tbAutomateUser (
-  idAutomateUser integer NOT NULL AUTO_INCREMENT,
-  idUser int,
-  idAutomate int DEFAULT NULL,
-  PRIMARY KEY (idAutomateUser),
-  FOREIGN KEY (idUser) REFERENCES tbUser(idUser),
-  FOREIGN KEY (idAutomate) REFERENCES tbAutomate(idAutomate)
-);
-
-
 CREATE TABLE `tbPlants` (
   `idPlant` int NOT NULL AUTO_INCREMENT,
   `plantName` varchar(30) NOT NULL,
@@ -25,6 +15,22 @@ CREATE TABLE `tbPlants` (
   PRIMARY KEY (`idPlant`)
 );
 
+CREATE TABLE `tbUser` (
+  `idUser` int NOT NULL AUTO_INCREMENT,
+  `userName` varchar(30) NOT NULL,
+  `userEmail` varchar(30) NOT NULL,
+  `userPassword` varchar(20) NOT NULL,
+  PRIMARY KEY (`idUser`)
+);
+
+CREATE TABLE tbAutomateUser (
+  idAutomateUser integer NOT NULL AUTO_INCREMENT,
+  idUser int,
+  idAutomate int DEFAULT NULL,
+  PRIMARY KEY (idAutomateUser),
+  FOREIGN KEY (idUser) REFERENCES tbUser(idUser),
+  FOREIGN KEY (idAutomate) REFERENCES tbAutomate(idAutomate)
+);
 
 CREATE TABLE `tbRegPlant` (
   `idRegPlant` int NOT NULL AUTO_INCREMENT,
@@ -38,7 +44,6 @@ CREATE TABLE `tbRegPlant` (
   FOREIGN KEY (idAutomate) REFERENCES tbAutomate (idAutomate)
 );
 
-
 CREATE TABLE `tbReport` (
   `idReport` int NOT NULL AUTO_INCREMENT,
   `idAutomateUser` int DEFAULT NULL,
@@ -49,15 +54,6 @@ CREATE TABLE `tbReport` (
   PRIMARY KEY (`idReport`),
   FOREIGN KEY (idAutomateUser) REFERENCES tbAutomateUser (idAutomateUser)
 );
-
-CREATE TABLE `tbUser` (
-  `idUser` int NOT NULL AUTO_INCREMENT,
-  `userName` varchar(30) NOT NULL,
-  `userEmail` varchar(30) NOT NULL,
-  `userPassword` varchar(20) NOT NULL,
-  PRIMARY KEY (`idUser`)
-);
-
 
 CREATE TABLE `tbWifi` (
   `idWifi` int NOT NULL AUTO_INCREMENT,
