@@ -30,7 +30,7 @@ function handleSignInRoute(req, res) {
     const errors = validationResult(req)
     if(errors.isEmpty()){
         const {userEmail, userPassword} = req.body
-        signIn(userEmail, userPassword, (result) =>{
+        signIn(userEmail, userPassword).then(result => {
             return res.status(200).json(result)
         })
     } else{

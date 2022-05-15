@@ -20,19 +20,25 @@ async function createUser(userName, userEmail, userPassword){
     return false
     
 }
-function signIn(userEmail, userPassword, callBack){
-    const result = {
-        sucess:false,
-        user:null
-    }
-    connection.query('SELECT userName, userEmail, userPassword FROM tbUser WHERE userEmail= ? AND userPassword = ?', [userEmail, userPassword], (err, results) => {
-        if(results[0]){
-            result.sucess = true
-            result.user = results[0]
-            return callBack(result)
+async function signIn(userEmail, userPassword){
+    return new Promise((resolve, reject) => {
+        const result = {
+            sucess:false,
+            user:null
         }
-        callBack(result)
+        connection.query('SELECT userName, userEmail, userPassword FROM tbUser WHERE userEmail= ? AND userPassword = ?', [userEmail, userPassword], (err, results) => {
+            if(err) {
+                return reject(err)
+            }
+            if(results[0]){
+                result.sucess = true
+                result.user = results[0]
+                return resolve(result)
+            }
+            return resolve(result)
+        })
     })
+    
 
 }
 export {createUser, signIn}
