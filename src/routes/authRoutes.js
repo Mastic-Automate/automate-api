@@ -6,6 +6,7 @@ const authRoutes = Router()
 
 import {handleSignIn} from '../handlers/handleSignIn.js'
 import {handleSignUp} from '../handlers/handleSignUp.js'
+import {handleDeleteUser} from '../handlers/handleDeleteUser.js'
 
 authRoutes.post('/signup',
     [
@@ -22,5 +23,6 @@ authRoutes.post('/signin',
     ],
     handleSignIn
 )
+authRoutes.post('/deleteUser', handleDeleteUser)
 
 export {authRoutes}
