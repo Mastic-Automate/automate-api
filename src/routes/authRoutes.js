@@ -6,6 +6,9 @@ const authRoutes = Router()
 
 import {handleSignIn} from '../handlers/handleSignIn.js'
 import {handleSignUp} from '../handlers/handleSignUp.js'
+import {handleDeleteUser} from '../handlers/handleDeleteUser.js'
+import {handleChangeUserName} from '../handlers/handleChangeUserName.js'
+import {handleChangeUserPassword} from '../handlers/handleChangeUserPassword.js'
 
 authRoutes.post('/signup',
     [
@@ -22,5 +25,8 @@ authRoutes.post('/signin',
     ],
     handleSignIn
 )
+authRoutes.post('/deleteUser', handleDeleteUser)
+authRoutes.post('/changeUserName', handleChangeUserName)
+authRoutes.post('/changeUserPassword', handleChangeUserPassword)
 
 export {authRoutes}
