@@ -3,7 +3,7 @@ import {connection} from '../../database/mysql.js'
 async function changeUserPassword(userId, newPassword){
     return new Promise((resolve, reject) => {
         connection.query(
-            'UPDATE tbuser SET userPassword = ? WHERE idUser= ?',
+            'UPDATE tbUser SET userPassword = ? WHERE idUser= ?',
             [newPassword, userId], 
             (err, result) => {
                 if(!err) {
@@ -11,6 +11,7 @@ async function changeUserPassword(userId, newPassword){
                         sucess:true
                     })
                 }
+                console.log(err)
             })
     })
 }
