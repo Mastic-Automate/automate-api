@@ -7,7 +7,7 @@ function handleSignUp(req, res){
     const {userName, userEmail, userPassword} = req.body
     if(errors.isEmpty()){
         signUp(userName, userEmail, userPassword).then((result) =>{
-            return res.status(200).json({
+            return res.status(201).json({
                 sucess:result.sucess,
                 msg:result.msg,
                 user: {
