@@ -10,7 +10,7 @@ function handleSignIn(req, res) {
             return res.status(200).json(result)
         })
     } else{
-        return res.status(422).jsonp({
+        return res.status(400).jsonp({
             sucess:false,
             errors: errors.array(),
             errorsMsgs: errors.array().map(err => err.msg)
