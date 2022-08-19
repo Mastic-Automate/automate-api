@@ -2,7 +2,7 @@ import { connection } from "../../database/mysql.js"
 
 export async function getPlants(count){
     return new Promise((resolve, reject) => {
-        connection.query('SELECT idPlant, plantName, plantAbout, plantWaterQuantity, plantSize, plantTemperature from tbPlants LIMIT ?', 
+        connection.query('SELECT idPlant, plantName, plantAbout, plantWaterQuantity, plantSize, plantTemperature, plantTimeHarvest from tbPlants LIMIT ?', 
         [count], 
         (err, result) => {
             if(!err){
