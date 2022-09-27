@@ -9,6 +9,7 @@ import {handleSignUp} from '../handlers/handleSignUp.js'
 import {handleDeleteUser} from '../handlers/handleDeleteUser.js'
 import {handleChangeUserName} from '../handlers/handleChangeUserName.js'
 import {handleChangeUserPassword} from '../handlers/handleChangeUserPassword.js'
+import { verifyToken } from '../middlewares/verifyToken.js'
 
 authRoutes.post('/signup',
     [
@@ -20,13 +21,26 @@ authRoutes.post('/signup',
 )
 authRoutes.post('/signin',
     [
+        verifyToken,
         check('userEmail', 'Email inválido').isEmail().normalizeEmail(),
         check('userPassword', 'Senha inválida').isLength({min:8, max:40}).withMessage('Senha de usuário deve ter ao menos 8 caracteres e no máximo 40')
     ],
     handleSignIn
 )
 authRoutes.post('/deleteUser', handleDeleteUser)
-authRoutes.post('/changeUserName', handleChangeUserName)
-authRoutes.post('/changeUserPassword', handleChangeUserPassword)
+authRoutes.post(
+    '/changeUserName', 
+    [
+        verifyToken,
+        handleChangeUserName
+    ]
+)
+authRoutes.post(
+    '/changeUserPassword', 
+    [
+        verifyToken,
+        handleChangeUserPassword
+    ]
+)
 
 export {authRoutes}
