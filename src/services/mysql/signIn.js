@@ -20,7 +20,6 @@ async function signIn(userEmail, userPassword){
             result.user = userExists.user
             result.msg = 'Signin efetuado com sucesso!'
         } else {
-            console.log('Senha incorreta')
             result.msg = 'Senha incorreta'
         }
         return resolve(result)
