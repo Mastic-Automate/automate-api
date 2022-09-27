@@ -27,7 +27,13 @@ authRoutes.post('/signin',
     ],
     handleSignIn
 )
-authRoutes.post('/deleteUser', handleDeleteUser)
+authRoutes.delete(
+    '/deleteUser',
+    [
+        verifyToken,
+        handleDeleteUser
+    ]
+)
 authRoutes.post(
     '/changeUserName', 
     [
