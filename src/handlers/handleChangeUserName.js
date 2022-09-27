@@ -1,12 +1,12 @@
-import {changeUserName} from '../services/mysql/changeUserName.js'
+import {changeUserName} from '../services/mysql/changeUserName.js';
 
 function handleChangeUserName(req, res){
     const {newName, userId} = req.body
     changeUserName(userId, newName).then(result => {
-        res.status(404).json({
+        res.status(200).json({
             sucess:result.sucess
-        })
-    })
+        });
+    });
 }
 
 export {handleChangeUserName}
