@@ -4,7 +4,6 @@ import cookieParser from 'cookie-parser'
 
 import {authRoutes} from './src/routes/authRoutes.js'
 import { infoRoutes } from './src/routes/infoRoutes.js'
-import { connection } from './src/database/mysql.js'
 
 const app = express()
 
@@ -18,5 +17,4 @@ app.use(infoRoutes)
 const PORT = process.env.PORT || 3000
 app.listen(PORT, ()=> {
     console.log(`App running on localhost:${PORT}`)
-    connection.query('SELECT * from tbUser', (err, result) => console.log(result))
 })
