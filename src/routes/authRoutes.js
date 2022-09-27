@@ -43,7 +43,7 @@ authRoutes.post(
     ]
 )
 authRoutes.get(
-    'userinfo',
+    '/userinfo',
     [
         verifyToken,
         handleGetUserInfo

@@ -7,7 +7,7 @@ export async function getUserInfo(userId){
             [userId],
             (err, result) => {
                 if(!err){
-                    return resolve(result)
+                    return resolve(result[0])
                 }
                 reject(err)
             }
