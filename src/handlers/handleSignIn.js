@@ -16,7 +16,10 @@ async function handleSignIn(req, res) {
                 userId: signedUser.idUser,
                 userEmail: signedUser.userEmail
             },
-            process.env.TOKEN_SECRET
+            process.env.TOKEN_SECRET,
+            {
+                expiresIn: '12h'
+            }
         )
 
         return res
