@@ -1,6 +1,8 @@
 import {Router} from 'express'
+import {verifyToken} from '../middlewares/verifyToken.js';
 import { getPlants } from '../services/mysql/getPlants.js'
 import { getPlantInfo } from '../services/mysql/getPlantInfo.js'
+import { handleGetUserPlants } from '../handlers/handleGetUserPlants.js';
 
 const infoRoutes = Router()
 
@@ -20,5 +22,12 @@ infoRoutes.get('/getPlant', async (req, res) => {
     const plant = await getPlantInfo(id)
     return res.status(200).json(plant)
 })
+infoRoutes.get(
+    '/user/plants',
+    [
+        verifyToken,
+        handleGetUserPlants
+    ] 
+)
 
 export {infoRoutes}
