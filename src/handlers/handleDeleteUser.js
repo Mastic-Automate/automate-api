@@ -1,11 +1,11 @@
 import {deleteUser} from '../services/mysql/deleteUser.js';
 
-function handleDeleteUser(req, res) {
-    deleteUser(req.body.userId).then(result => {
-        return res.status(200).json({
-            sucess:result.sucess
-        });
-    });
+async function handleDeleteUser(req, res) {
+    const {user} = req.body;
+    const queryResult = await deleteUser(user.userId);
+    return res.status(200).json({
+        queryResult
+    })
 }
 
 export {handleDeleteUser}

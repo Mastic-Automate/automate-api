@@ -13,7 +13,7 @@ async function signIn(userEmail, userPassword){
         result.msg = 'Usuário não existe'
         return result
     }
-    const isPasswordCorrect = await compare(userPassword, userExists.user.userPassword)
+    const isPasswordCorrect = await compare(userPassword, userExists.user.userPassword);
     return new Promise((resolve, reject) => {
         if(isPasswordCorrect) {
             result.sucess = true

@@ -2,7 +2,7 @@ import {connection} from '../../database/mysql.js'
 
 async function deleteUser(userId){
     return new Promise((resolve, reject) => {
-        connection.query('DELETE FROM tbuser WHERE idUser = ?', [userId], (err, result) => {
+        connection.query('DELETE FROM tbUser WHERE idUser = ?', [userId], (err, result) => {
             if(!err){
                 return resolve({
                     sucess:true

@@ -9,6 +9,9 @@ import {handleSignUp} from '../handlers/handleSignUp.js'
 import {handleDeleteUser} from '../handlers/handleDeleteUser.js'
 import {handleChangeUserName} from '../handlers/handleChangeUserName.js'
 import {handleChangeUserPassword} from '../handlers/handleChangeUserPassword.js'
+import { verifyToken } from '../middlewares/verifyToken.js'
+import { handleGetUserInfo } from '../handlers/handleGetUserInfo.js'
+import { handleSignOut } from '../handlers/handleSignOut.js'
 
 authRoutes.post('/signup',
     [
@@ -25,8 +28,37 @@ authRoutes.post('/signin',
     ],
     handleSignIn
 )
-authRoutes.post('/deleteUser', handleDeleteUser)
-authRoutes.post('/changeUserName', handleChangeUserName)
-authRoutes.post('/changeUserPassword', handleChangeUserPassword)
+authRoutes.get(
+    '/signOut',
+    handleSignOut
+)
+authRoutes.delete(
+    '/deleteUser',
+    [
+        verifyToken,
+        handleDeleteUser
+    ]
+)
+authRoutes.post(
+    '/changeUserName', 
+    [
+        verifyToken,
+        handleChangeUserName
+    ]
+)
+authRoutes.post(
+    '/changeUserPassword', 
+    [
+        verifyToken,
+        handleChangeUserPassword
+    ]
+)
+authRoutes.get(
+    '/userinfo',
+    [
+        verifyToken,
+        handleGetUserInfo
+    ]
+)
 
 export {authRoutes}
