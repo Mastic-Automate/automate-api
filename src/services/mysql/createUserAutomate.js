@@ -1,6 +1,6 @@
-import { connection } from "../../database/mysql";
+import { connection } from "../../database/mysql.js";
 
-export async function createUserPlant(
+export async function createUserAutomate(
   idAutomateDevice, 
   idUser, 
   idPlant,

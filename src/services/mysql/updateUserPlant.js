@@ -1,4 +1,4 @@
-import { connection } from "../../database/mysql";
+import { connection } from "../../database/mysql.js";
 
 async function updateUserPlantName(newName, idAutomate){
   return new Promise((resolve, reject) => {

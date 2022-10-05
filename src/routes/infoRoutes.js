@@ -14,7 +14,7 @@ infoRoutes.get('/getPlants', async (req, res) => {
 });
 
 infoRoutes.get('/getPlant', async (req, res) => {
-    const id = Number(req.query.id)
+    const id = Number(req.query.id);
     if(!id) {
         return res.status(404).json({
             message: 'No id provided'
