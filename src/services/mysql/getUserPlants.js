@@ -3,7 +3,7 @@ import {connection} from '../../database/mysql.js';
 export async function getUserPlants(userId){
   return new Promise((resolve, reject)=> {
     connection.query(
-      'SELECT * FROM tbAutomateUser WHERE idUser = ?',
+      'SELECT * FROM tbAutomate WHERE idUser = ?',
       [userId],
       (err, result)=> {
         if(!err){
