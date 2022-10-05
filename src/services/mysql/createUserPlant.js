@@ -16,7 +16,7 @@ export async function createUserPlant(
       VALUES(?, ?, ?, ?, ?, ?, ?, ?)`,
       [idAutomateDevice, idUser, idPlant, plantName, plantHoursSun, plantWaterQuantity, plantSoilHumidity, plantTemperature],
       (err, result) => {
-        if(!err){
+        if(err){
           return reject(err);
         }
         return resolve(result);
