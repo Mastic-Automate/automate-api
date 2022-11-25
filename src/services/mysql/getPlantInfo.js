@@ -1,12 +1,12 @@
 import { connection } from "../../database/mysql.js";
 
-export async function getPlantInfo(id){
-    return new Promise((resolve, reject)=>{
+export async function getPlantInfo(id) {
+    return new Promise((resolve, reject) => {
         connection.query(
-            'SELECT * FROM tbPlants WHERE idPlant = ?',
+            'SELECT * FROM tbPlant WHERE idPlant = ?',
             [id],
             (err, result) => {
-                if(!err){
+                if (!err) {
                     return resolve(result)
                 }
                 return reject(err)
